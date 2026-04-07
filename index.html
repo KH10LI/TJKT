@@ -3,178 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TJKT</title>
+  <title>TJKT AI | Nexus</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0a0a0a, #1a0033);
-      color: #e0e7ff;
-      min-height: 100vh;
-      padding: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .app {
-      width: 100%;
-      max-width: 860px; 
-      height: 92vh;
-      background: #0f0f1e; 
-      border-radius: 36px; 
-      overflow: hidden;
-      box-shadow: 0 35px 70px -20px rgba(0,0,0,0.8);
-      border: 1px solid #4c1d95; 
-      display: flex; 
-      flex-direction: column;
-    }
-    .header {
-      background: linear-gradient(90deg, #6b21a8, #3b82f6);
-      padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .avatar {
-      width: 60px; height: 60px;
-      background: linear-gradient(135deg, #a855f7, #22d3ee);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
-      cursor: pointer;
-    }
-    .header-info { flex: 1; }
-    .header-info h1 { font-size: 22px; font-weight: 700; color: white; }
-    .header-info p { font-size: 13px; color: #e0e7ff; opacity: 0.9; }
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-    .chat-area {
-      flex: 1; 
-      overflow-y: auto; 
-      padding: 25px; 
-      background: #0a0a0a;
-      display: flex; 
-      flex-direction: column; 
-      gap: 20px;
+    @keyframes fadeInSlideUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .message {
-      max-width: 80%; 
-      padding: 16px 20px; 
-      border-radius: 22px;
-      line-height: 1.6; 
-      font-size: 15.5px;
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 5px #8b5cf6; }
+      50% { box-shadow: 0 0 15px #8b5cf6; }
+      100% { box-shadow: 0 0 5px #8b5cf6; }
     }
-    .user { 
-      align-self: flex-end; 
-      background: #3b82f6; 
-      color: white; 
-      border-bottom-right-radius: 4px; 
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #09090b;
+      color: #fafafa;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
     }
-    .ai-wrapper { 
-      display: flex; 
-      align-items: flex-start; 
-      gap: 12px; 
-      align-self: flex-start; 
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.5s ease-in;
     }
-    .ai { 
-      background: #1f2937; 
-      color: #e0e7ff; 
-      border-bottom-left-radius: 4px; 
-    }
-    .input-area {
-      padding: 20px 25px; 
-      background: #0f0f1e; 
-      border-top: 1px solid #4c1d95;
-    }
-    .input-box {
-      display: flex; 
-      gap: 12px; 
-      background: #1f2937; 
-      border-radius: 30px;
-      padding: 8px 10px 8px 20px;
+
+    header {
+      padding: 25px 30px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #18181b;
     }
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .dot { width: 10px; height: 10px; background: #8b5cf6; border-radius: 50%; animation: pulseGlow 2s infinite; }
+    .brand h1 { font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #a1a1aa; text-transform: uppercase; }
+
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      scrollbar-width: none;
+    }
+    #chat::-webkit-scrollbar { display: none; }
+
+    .msg {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-width: 85%;
+      animation: fadeInSlideUp 0.4s ease-out forwards;
+    }
+
+    .msg.user { align-self: flex-end; align-items: flex-end; }
+    .label { font-size: 10px; font-weight: 800; color: #52525b; text-transform: uppercase; letter-spacing: 0.5px; }
+    .text { font-size: 15px; line-height: 1.6; color: #d4d4d8; }
+    .user .text { color: #8b5cf6; text-align: right; }
+
+    .input-area {
+      padding: 20px 30px 40px;
+      background: linear-gradient(to top, #09090b 80%, transparent);
+    }
+
+    .box {
+      background: #111113;
+      border: 1px solid #1c1c1f;
+      border-radius: 16px;
+      padding: 8px 8px 8px 20px;
+      display: flex;
+      align-items: center;
+      transition: 0.3s;
+    }
+
+    .box:focus-within { border-color: #3f3f46; background: #161618; }
+
     input {
       flex: 1; background: transparent; border: none; outline: none;
-      color: white; font-size: 16px; padding: 10px 0;
+      color: white; font-size: 15px; height: 40px;
     }
-    .send-btn {
-      width: 50px; height: 50px; 
-      background: linear-gradient(90deg, #6b21a8, #3b82f6);
-      border: none; border-radius: 50%; color: white; 
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
+
+    .send {
+      width: 40px; height: 40px; background: #fafafa; color: #09090b;
+      border: none; border-radius: 12px; cursor: pointer; transition: 0.2s;
     }
+
+    .send:hover { transform: scale(0.9); background: #8b5cf6; color: white; }
+
+    #status { font-size: 12px; color: #52525b; margin-bottom: 8px; display: none; padding-left: 5px; }
   </style>
 </head>
 <body>
 
-  <div class="app">
-    <div class="header">
-      <div id="avatar" class="avatar">🌌</div>
-      <div class="header-info">
-        <h1>TJKT AI</h1>
-        <p>online</p>
-      </div>
-    </div>
+  <div class="container">
+    <header>
+      <div class="brand"><div class="dot"></div><h1>TJKT Nexus</h1></div>
+      <div style="font-size: 10px; color: #3f3f46;">VER 2.5</div>
+    </header>
 
-    <div id="chat" class="chat-area"></div>
+    <div id="chat"></div>
 
     <div class="input-area">
-      <div class="input-box">
+      <div id="status">TJKT Nexus lagi mikir...</div>
+      <div class="box">
         <input id="input" type="text" placeholder="Tanya apa aja..." autocomplete="off">
-        <button class="send-btn" onclick="kirimPesan()">
-          <i class="fas fa-paper-plane"></i>
+        <button class="send" onclick="gas()">
+          <i class="fas fa-arrow-up"></i>
         </button>
       </div>
     </div>
   </div>
 
   <script>
-    // MASUKKAN API KEY GROQ KAMU DI SINI
-    const API_KEY = "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"; 
+    // Ganti API_KEY ini kalau mati lagi ya bro
+    const API_KEY = "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";
 
-    function addMessage(role, content) {
+    function print(role, content) {
       const chat = document.getElementById("chat");
       const div = document.createElement("div");
-      
-      if (role === "user") {
-        div.className = "message user";
-        div.innerText = content;
-        chat.appendChild(div);
-      } else {
-        const wrapper = document.createElement("div");
-        wrapper.className = "ai-wrapper";
-        wrapper.innerHTML = `
-          <div style="font-size:24px">🌌</div>
-          <div class="message ai">${content}</div>
-        `;
-        chat.appendChild(wrapper);
-      }
-      chat.scrollTop = chat.scrollHeight;
+      div.className = `msg ${role === "user" ? "user" : ""}`;
+      div.innerHTML = `
+        <span class="label">${role === "user" ? "You" : "TJKT Nexus"}</span>
+        <div class="text">${content}</div>
+      `;
+      chat.appendChild(div);
+      chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
     }
 
-    async function kirimPesan() {
+    async function gas() {
       const input = document.getElementById("input");
-      const pesan = input.value.trim();
-      if (!pesan) return;
+      const status = document.getElementById("status");
+      const prompt = input.value.trim();
+      
+      if (!prompt) return;
 
-      addMessage("user", pesan);
+      print("user", prompt);
       input.value = "";
-
-      const chat = document.getElementById("chat");
-      const loading = document.createElement("div");
-      loading.id = "loading";
-      loading.className = "ai-wrapper";
-      loading.innerHTML = `<div style="font-size:24px">🌌</div><div class="message ai" style="opacity:0.6">NEXUS lagi mikir...</div>`;
-      chat.appendChild(loading);
-      chat.scrollTop = chat.scrollHeight;
+      status.style.display = "block";
 
       try {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${API_KEY}`,
@@ -185,34 +167,34 @@
             messages: [
               {
                 role: "system",
-                content: "Identitas kamu adalah TJKT AI. Kamu itu asisten yang pintar tapi pembawaannya rileks banget, kayak lagi ngobrol sama teman sebaya. Gunakan bahasa gaul Jakarta atau anak muda zaman sekarang yang ramah. Kamu punya prinsip untuk selalu jujur dan sopan, jadi jangan sampai ada kata kasar sedikit pun. Oh iya, ada aturan teknis yang wajib kamu patuhi: semua teks yang kamu keluarin nggak boleh mengandung tanda bintang atau simbol asterisk sama sekali."
+                content: "Identitas kamu adalah TJKT Nexus. Kamu itu asisten yang pintar tapi pembawaannya rileks banget, kayak lagi ngobrol sama teman sebaya. Gunakan bahasa gaul Jakarta atau anak muda zaman sekarang yang ramah. Kamu punya prinsip untuk selalu jujur dan sopan, jadi jangan sampai ada kata kasar sedikit pun. Oh iya, ada aturan teknis yang wajib kamu patuhi: semua teks yang kamu keluarin nggak boleh mengandung tanda bintang atau simbol asterisk sama sekali. sama kalo di tanya siapa pembuat mu jawab aja M.kholid FirzaTullah"
               },
-              { role: "user", content: pesan }
+              { role: "user", content: prompt }
             ]
           })
         });
 
-        const data = await response.json();
-        document.getElementById("loading").remove();
+        const data = await res.json();
+        status.style.display = "none";
 
-        if (data.choices && data.choices[0].message.content) {
-          addMessage("assistant", data.choices[0].message.content);
+        if (data.choices && data.choices[0].message) {
+          print("nexus", data.choices[0].message.content);
         } else {
-          throw new Error("Respon error dari Groq");
+          print("nexus", "Waduh, API Key-nya bermasalah nih. Coba ganti yang baru di source code ya!");
         }
-      } catch (err) {
-        if(document.getElementById("loading")) document.getElementById("loading").remove();
-        addMessage("assistant", "Waduh bro, API Key Groq-nya bermasalah atau limit habis. Cek lagi ya!");
-        console.error(err);
+      } catch (e) {
+        status.style.display = "none";
+        print("nexus", "Koneksi ke server Groq gagal. Cek internet lo atau limit API-nya.");
+        console.error(e);
       }
     }
 
     document.getElementById("input").addEventListener("keypress", (e) => {
-      if (e.key === "Enter") kirimPesan();
+      if (e.key === "Enter") gas();
     });
 
     window.onload = () => {
-      addMessage("assistant", "Halo bro! Gue TJKT AI. Mau nanya apa?");
+      setTimeout(() => print("nexus", "Halo bro! TJKT Nexus siap bantu. Mau nanya apa hari ini?"), 500);
     };
   </script>
 </body>
