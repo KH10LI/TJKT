@@ -2,30 +2,28 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>TJKT AI | Nexus</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-    @keyframes fadeInSlideUp {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 5px #8b5cf6; }
-      50% { box-shadow: 0 0 15px #8b5cf6; }
-      100% { box-shadow: 0 0 5px #8b5cf6; }
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-dark: #09090b;
+      --card-dark: #111113;
+      --accent: #8b5cf6;
+      --text-main: #fafafa;
+      --text-muted: #a1a1aa;
+    }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #09090b;
-      color: #fafafa;
-      height: 100vh;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      /* Pakai dvh supaya fix pas di layar HP */
+      height: 100dvh;
       display: flex;
       justify-content: center;
       overflow: hidden;
@@ -34,77 +32,123 @@
     .container {
       width: 100%;
       max-width: 800px;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      animation: fadeIn 0.5s ease-in;
+      position: relative;
     }
 
     header {
-      padding: 25px 30px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #18181b;
+      background: rgba(9, 9, 11, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #1c1c1f;
+      z-index: 10;
     }
 
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .dot { width: 10px; height: 10px; background: #8b5cf6; border-radius: 50%; animation: pulseGlow 2s infinite; }
-    .brand h1 { font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #a1a1aa; text-transform: uppercase; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .dot { 
+      width: 8px; height: 8px; background: var(--accent); border-radius: 50%; 
+      box-shadow: 0 0 10px var(--accent);
+    }
+    .brand h1 { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
     #chat {
       flex: 1;
       overflow-y: auto;
-      padding: 30px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 15px;
       scrollbar-width: none;
+      /* Background tipis biar nggak polos banget */
+      background-image: radial-gradient(circle at 50% 50%, #111 0%, #09090b 100%);
     }
     #chat::-webkit-scrollbar { display: none; }
 
     .msg {
+      max-width: 85%;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      max-width: 85%;
-      animation: fadeInSlideUp 0.4s ease-out forwards;
+      animation: msgIn 0.3s ease-out forwards;
     }
 
-    .msg.user { align-self: flex-end; align-items: flex-end; }
-    .label { font-size: 10px; font-weight: 800; color: #52525b; text-transform: uppercase; letter-spacing: 0.5px; }
-    .text { font-size: 15px; line-height: 1.6; color: #d4d4d8; }
-    .user .text { color: #8b5cf6; text-align: right; }
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.user { align-self: flex-end; }
+    .msg.nexus { align-self: flex-start; }
+
+    .label { 
+      font-size: 9px; font-weight: 700; color: #52525b; 
+      margin-bottom: 4px; text-transform: uppercase; margin-left: 12px;
+    }
+    .user .label { margin-left: 0; margin-right: 12px; text-align: right; }
+
+    .bubble {
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .nexus .bubble {
+      background: var(--card-dark);
+      color: #e4e4e7;
+      border: 1px solid #1c1c1f;
+      border-bottom-left-radius: 4px;
+    }
+
+    .user .bubble {
+      background: var(--accent);
+      color: white;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
 
     .input-area {
-      padding: 20px 30px 40px;
-      background: linear-gradient(to top, #09090b 80%, transparent);
+      padding: 15px 20px 25px; /* Padding bawah lebih lega buat navigasi HP */
+      background: var(--bg-dark);
+      border-top: 1px solid #1c1c1f;
     }
+
+    #status { 
+      font-size: 11px; color: var(--accent); margin-bottom: 8px; 
+      display: none; font-weight: 500; animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
     .box {
-      background: #111113;
-      border: 1px solid #1c1c1f;
-      border-radius: 16px;
-      padding: 8px 8px 8px 20px;
+      background: #161618;
+      border: 1px solid #27272a;
+      border-radius: 24px;
+      padding: 5px 5px 5px 18px;
       display: flex;
       align-items: center;
-      transition: 0.3s;
+      transition: 0.2s;
     }
 
-    .box:focus-within { border-color: #3f3f46; background: #161618; }
+    .box:focus-within { border-color: var(--accent); }
 
     input {
       flex: 1; background: transparent; border: none; outline: none;
-      color: white; font-size: 15px; height: 40px;
+      color: white; font-size: 14px; height: 40px;
     }
 
     .send {
-      width: 40px; height: 40px; background: #fafafa; color: #09090b;
-      border: none; border-radius: 12px; cursor: pointer; transition: 0.2s;
+      width: 38px; height: 38px; background: var(--accent); color: white;
+      border: none; border-radius: 50%; cursor: pointer; transition: 0.2s;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .send:hover { transform: scale(0.9); background: #8b5cf6; color: white; }
-
-    #status { font-size: 12px; color: #52525b; margin-bottom: 8px; display: none; padding-left: 5px; }
+    .send:active { transform: scale(0.9); }
   </style>
 </head>
 <body>
@@ -112,35 +156,36 @@
   <div class="container">
     <header>
       <div class="brand"><div class="dot"></div><h1>TJKT Nexus</h1></div>
-      <div style="font-size: 10px; color: #3f3f46;">VER 2.5</div>
+      <div style="font-size: 9px; color: #3f3f46; font-weight: 700;">V2.5 STABLE</div>
     </header>
 
     <div id="chat"></div>
 
     <div class="input-area">
-      <div id="status">TJKT Nexus lagi mikir...</div>
+      <div id="status">TJKT Nexus lagi ngetik...</div>
       <div class="box">
-        <input id="input" type="text" placeholder="Tanya apa aja..." autocomplete="off">
+        <input id="input" type="text" placeholder="Ketik pesan..." autocomplete="off">
         <button class="send" onclick="gas()">
-          <i class="fas fa-arrow-up"></i>
+          <i class="fas fa-paper-plane"></i>
         </button>
       </div>
     </div>
   </div>
 
   <script>
-    // Ganti API_KEY ini kalau mati lagi ya bro
     const API_KEY = "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";
 
     function print(role, content) {
       const chat = document.getElementById("chat");
-      const div = document.createElement("div");
-      div.className = `msg ${role === "user" ? "user" : ""}`;
-      div.innerHTML = `
-        <span class="label">${role === "user" ? "You" : "TJKT Nexus"}</span>
-        <div class="text">${content}</div>
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `msg ${role === "user" ? "user" : "nexus"}`;
+      
+      msgDiv.innerHTML = `
+        <span class="label">${role === "user" ? "Anda" : "TJKT Nexus"}</span>
+        <div class="bubble">${content}</div>
       `;
-      chat.appendChild(div);
+      
+      chat.appendChild(msgDiv);
       chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
     }
 
@@ -180,12 +225,11 @@
         if (data.choices && data.choices[0].message) {
           print("nexus", data.choices[0].message.content);
         } else {
-          print("nexus", "Waduh, API Key-nya bermasalah nih. Coba ganti yang baru di source code ya!");
+          print("nexus", "Waduh, ada kendala teknis nih bro. Coba lagi nanti ya.");
         }
       } catch (e) {
         status.style.display = "none";
-        print("nexus", "Koneksi ke server Groq gagal. Cek internet lo atau limit API-nya.");
-        console.error(e);
+        print("nexus", "Koneksi gagal. Cek kuota atau internet lo dulu deh.");
       }
     }
 
