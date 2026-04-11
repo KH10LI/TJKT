@@ -440,7 +440,7 @@
               }
           } catch (e) {
               document.getElementById("status").style.display = "none";
-              const msg = e.message === "ALL_KEYS_LIMIT" ? "Waduh, semua jalur API lagi penuh banget (Limit). Coba tunggu semenit terus chat lagi ya bro!" : "Koneksi lagi bapuk nih bro. Coba lagi ya!";
+              const msg = e.message === "ALL_KEYS_LIMIT" ? "Waduh, semua jalur API di tutup sama tuan gua nih" : "Koneksi lagi bapuk nih bro. Coba lagi ya!";
               print("nexus", msg);
           } finally {
               setTimeout(() => { sendBtn.disabled = false; }, 1000);
