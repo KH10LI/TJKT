@@ -1,462 +1,274 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TJKT AI | Nexus Platinum</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Optimization</title>
+    <style>
+        /* Modern CSS Reset & Anti-Copy */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: default;
+        }
 
-    * { 
-      margin: 0; padding: 0; box-sizing: border-box; 
-      -webkit-user-select: none; user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
+        body {
+            background-color: #030303; /* Lebih gelap dari hitam biasa */
+            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-    :root {
-      --bg-dark: #030305;
-      --sidebar-bg: #08080a;
-      --card-dark: #0e0e11;
-      --accent: #7c4dff;
-      --accent-soft: #9a75ff;
-      --accent-glow: rgba(124, 77, 255, 0.25);
-      --text-main: #ffffff;
-      --text-muted: #71717a;
-      --danger: #ff3d71;
-      --ease: cubic-bezier(0.23, 1, 0.32, 1);
-    }
+        /* Latar Belakang Gradasi Halus & Dinamis */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: pulse 6s infinite alternate;
+        }
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-main);
-      height: 100dvh;
-      display: flex;
-      overflow: hidden;
-    }
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
 
-    /* --- SIDEBAR REFINED --- */
-    .sidebar {
-      width: 280px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid rgba(255,255,255,0.03);
-      display: flex;
-      flex-direction: column;
-      padding: 24px 20px;
-      transition: transform 0.5s var(--ease);
-      z-index: 100;
-    }
+        /* Kontainer Utama (Card Effect) */
+        .container {
+            width: 85%;
+            max-width: 480px;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            background: rgba(10, 10, 10, 0.6);
+            padding: 50px 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px); /* Efek Glassmorphism */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
 
-    .new-chat-btn {
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, var(--accent), #5e35b1);
-      border: none;
-      color: white;
-      border-radius: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 13px;
-      margin-bottom: 30px;
-      box-shadow: 0 8px 20px -4px rgba(124, 77, 255, 0.4);
-      transition: all 0.4s var(--ease);
-    }
+        /* Lencana Status */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.75rem;
+            color: #888;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
 
-    .new-chat-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px -4px rgba(124, 77, 255, 0.5); }
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background-color: #f1c40f; /* Warna Amber/Kuning */
+            border-radius: 50%;
+            box-shadow: 0 0 10px #f1c40f;
+            animation: blink 1.5s infinite;
+        }
 
-    .history-label { 
-      font-size: 10px; color: var(--text-muted); font-weight: 800; 
-      margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px;
-      opacity: 0.7;
-    }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
 
-    #history-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-    #history-list::-webkit-scrollbar { width: 0; }
+        /* Judul Besar & Gradasi */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .history-item-wrapper { position: relative; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.015); padding-bottom: 4px; }
+        /* Deskripsi */
+        p.description {
+            color: #777;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 45px;
+            font-weight: 400;
+        }
 
-    .history-item {
-      flex: 1; padding: 12px 15px; border-radius: 12px; font-size: 13px;
-      color: var(--text-muted); cursor: pointer; white-space: nowrap;
-      overflow: hidden; text-overflow: ellipsis; transition: all 0.3s var(--ease);
-      border: 1px solid transparent;
-    }
+        /* Grid Timer Countdown */
+        #countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
 
-    .history-item:hover, .history-item.active { 
-      background: rgba(255, 255, 255, 0.03); 
-      color: var(--text-main);
-      border-color: rgba(255, 255, 255, 0.05);
-    }
+        /* Kotak Satuan Waktu */
+        .time-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 22px 5px;
+            border-radius: 16px;
+            transition: border 0.3s, transform 0.3s;
+        }
 
-    .delete-session-btn {
-      position: absolute; right: 8px; background: #141417; 
-      border: 1px solid rgba(255, 255, 255, 0.05); color: var(--text-muted);
-      padding: 7px; border-radius: 8px; font-size: 9px;
-      opacity: 0; transition: all 0.2s var(--ease);
-    }
-    .history-item-wrapper:hover .delete-session-btn { opacity: 1; }
-    .delete-session-btn:hover { color: var(--danger); border-color: rgba(255, 61, 113, 0.2); }
+        .time-box:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
 
-    /* --- MAIN SECTION REFINED --- */
-    .main-content { 
-      flex: 1; display: flex; flex-direction: column; 
-      background: radial-gradient(circle at 50% 10%, rgba(124, 77, 255, 0.04), transparent 70%); 
-    }
+        /* Angka */
+        .number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+            font-variant-numeric: tabular-nums; /* Angka tidak goyang */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
 
-    header {
-      padding: 18px 28px;
-      display: flex; justify-content: space-between; align-items: center;
-      background: rgba(3, 3, 5, 0.7);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      z-index: 10;
-    }
+        /* Label (Hari, Jam, dll) */
+        .label {
+            display: block;
+            font-size: 0.6rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        
+        /* Progress Bar Halus */
+        .progress-container {
+            width: 100%;
+            height: 3px;
+            background-color: #111;
+            border-radius: 3px;
+            margin-top: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar {
+            width: 70%; /* Simulasi loading */
+            height: 100%;
+            background: linear-gradient(90deg, #333 0%, #fff 50%, #333 100%);
+            border-radius: 3px;
+            animation: loading-shine 2s infinite linear;
+        }
+        
+        @keyframes loading-shine {
+            0% { background-position: -100px; }
+            100% { background-position: 480px; }
+        }
 
-    .brand { display: flex; align-items: center; gap: 14px; }
-    .dot { width: 9px; height: 9px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 15px var(--accent); position: relative; }
-    .dot::after { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: var(--accent); animation: pulse 2.5s infinite; }
-    @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(2.8); opacity: 0; } }
-
-    .brand h1 { font-size: 14px; font-weight: 800; letter-spacing: 1.5px; color: #fff; text-transform: uppercase; }
-
-    /* --- CHAT AREA REFINED --- */
-    #chat {
-      flex: 1; overflow-y: auto; padding: 30px;
-      display: flex; flex-direction: column; gap: 24px;
-      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.03) transparent;
-    }
-    #chat::-webkit-scrollbar { width: 4px; }
-    #chat::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.04); border-radius: 10px; }
-
-    .msg { max-width: 80%; display: flex; flex-direction: column; animation: chatIn 0.6s var(--ease); }
-    @keyframes chatIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-
-    .msg.user { align-self: flex-end; }
-    .msg.nexus { align-self: flex-start; }
-
-    .label { font-size: 9px; font-weight: 800; color: var(--text-muted); margin-bottom: 7px; text-transform: uppercase; letter-spacing: 1.5px; padding: 0 5px; opacity: 0.8; }
-    .user .label { text-align: right; color: var(--accent-soft); }
-
-    .bubble { 
-      padding: 15px 19px; border-radius: 20px; font-size: 14px; line-height: 1.65;
-      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.4);
-    }
-    .nexus .bubble { 
-      background: var(--card-dark); color: #ededed; 
-      border: 1px solid rgba(255,255,255,0.03);
-      border-bottom-left-radius: 6px;
-    }
-    .user .bubble { 
-      background: linear-gradient(135deg, var(--accent), #6200ea); 
-      color: white; border-bottom-right-radius: 6px;
-      box-shadow: 0 8px 20px -6px rgba(124, 77, 255, 0.3);
-    }
-
-    .copy-btn {
-      align-self: flex-start; margin: 10px 0 0 5px; background: transparent;
-      border: none; color: var(--text-muted); font-size: 10px; cursor: pointer;
-      display: flex; align-items: center; gap: 5px; font-weight: 600; transition: all 0.2s;
-    }
-    .copy-btn:hover { color: #fff; }
-
-    /* --- INPUT SECTION REFINED --- */
-    .input-area { 
-      padding: 15px 30px 35px; 
-      background: linear-gradient(to top, var(--bg-dark) 60%, transparent);
-    }
-
-    .input-container {
-      max-width: 900px; margin: 0 auto;
-      background: rgba(14, 14, 17, 0.8);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 24px;
-      padding: 6px 8px 6px 22px;
-      display: flex; align-items: center;
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-      transition: all 0.4s var(--ease);
-    }
-    .input-container:focus-within { 
-      border-color: rgba(124, 77, 255, 0.5);
-      box-shadow: 0 0 25px var(--accent-glow), 0 10px 30px -10px rgba(0,0,0,0.5);
-      transform: translateY(-2px);
-      background: rgba(14, 14, 17, 1);
-    }
-
-    #input { 
-      flex: 1; background: transparent; border: none; outline: none; 
-      color: white; font-size: 14px; height: 48px; font-family: inherit;
-      user-select: text; -webkit-user-select: text;
-    }
-    #input::placeholder { color: #4b4b53; }
-
-    .send { 
-      width: 44px; height: 44px; border: none; border-radius: 16px; 
-      background: var(--accent); color: white; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 10px rgba(124, 77, 255, 0.3);
-    }
-    .send:hover { background: var(--accent-soft); transform: scale(1.08) rotate(-5deg); box-shadow: 0 6px 15px rgba(124, 77, 255, 0.5); }
-    .send:active { transform: scale(0.92); }
-    .send:disabled { background: #2a2a2e; opacity: 0.6; cursor: not-allowed; }
-
-    /* --- STATUS & MODAL UNCHANGED --- */
-    #status { font-size: 10px; color: var(--accent-soft); margin-bottom: 12px; padding-left: 10px; display: none; font-weight: 700; letter-spacing: 0.5px; animation: blink 1.5s infinite; }
-    @keyframes blink { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.3s; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .modal-card { background: #0c0c0e; border: 1px solid rgba(255,255,255,0.06); padding: 35px; border-radius: 30px; width: 90%; max-width: 360px; text-align: center; transform: scale(0.9); animation: scaleUp 0.4s var(--ease) forwards; }
-    @keyframes scaleUp { to { transform: scale(1); } }
-
-    @media (max-width: 768px) {
-      .sidebar { position: absolute; left: -280px; height: 100%; }
-      .sidebar.active { left: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.7); }
-      .input-area { padding: 10px 15px 25px; }
-      header { padding: 14px 20px; }
-      #chat { padding: 20px; gap: 18px; }
-      .msg { max-width: 90%; }
-      .bubble { font-size: 13.5px; padding: 13px 17px; }
-    }
-  </style>
+    </style>
 </head>
 <body oncontextmenu="return false;">
 
-  <div class="sidebar" id="sidebar">
-    <button class="new-chat-btn" onclick="startNewChat()">
-      <i class="fas fa-plus"></i> Obrolan Baru
-    </button>
-    <div class="history-label">Memory</div>
-    <div id="history-list"></div>
-  </div>
+    <div class="container">
+        <div class="status-badge">
+            <div class="status-dot"></div>
+            System Optimization
+        </div>
 
-  <div class="main-content">
-    <header>
-      <div class="header-left">
-        <i class="fas fa-bars-staggered" style="cursor:pointer; margin-right: 18px; color: var(--text-muted); font-size: 16px; transition: 0.2s;" onclick="toggleSidebar()" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'"></i>
-        <div class="brand"><div class="dot"></div><h1>TJKT NEXUS</h1></div>
-      </div>
-      <div id="limit-info" style="font-size: 9px; color: var(--accent); font-weight: 800; background: rgba(124, 77, 255, 0.08); padding: 5px 12px; border-radius: 8px; border: 1px solid rgba(124, 77, 255, 0.15);">V3.8 PLATINUM</div>
-    </header>
+        <h1>sabar ya wkwk</h1>
+        <p class="description">sedang dalam peningkatan infrastruktur untuk performa yang lebih baik. Estimasi waktu tersisa :</p>
 
-    <div id="chat"></div>
-
-    <div class="input-area">
-      <div id="status">Nexus lagi ngerangkai kata...</div>
-      <div class="input-container">
-        <input id="input" type="text" placeholder="Tanya Nexus apa aja..." autocomplete="off">
-        <button class="send" id="sendBtn" onclick="gas()">
-          <i class="fas fa-paper-plane" style="font-size: 16px;"></i>
-        </button>
-      </div>
+        <div id="countdown">
+            <div class="time-box">
+                <span class="number" id="d">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="h">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="m">00</span>
+                <span class="label">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="s">00</span>
+                <span class="label">Secs</span>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
     </div>
-  </div>
 
-  <div class="modal-overlay" id="deleteModal">
-    <div class="modal-card">
-      <div style="background: rgba(255, 61, 113, 0.1); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; border: 1px solid rgba(255, 61, 113, 0.2);">
-        <i class="fas fa-trash-alt" style="font-size: 22px; color: var(--danger);"></i>
-      </div>
-      <h2 style="margin-bottom: 10px; font-weight: 800; font-size: 17px; letter-spacing: 0.5px;">Hapus Memori?</h2>
-      <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 28px; line-height: 1.6;">Aksi ini bakal ngehapus riwayat obrolan secara permanen dari memory local kamu. Yakin bro?</p>
-      <div style="display: flex; gap: 12px;">
-        <button style="flex:1; padding: 14px; border-radius: 14px; border:none; background: #1a1a1d; color: #fff; cursor:pointer; font-weight: 700; font-size: 13px; transition: 0.2s;" onclick="closeModal()" onmouseover="this.style.background='#232327'" onmouseout="this.style.background='#1a1a1d'">Batal</button>
-        <button style="flex:1; padding: 14px; border-radius: 14px; border:none; background: var(--danger); color: #fff; cursor:pointer; font-weight: 700; font-size: 13px; transition: 0.2s;" id="confirmDeleteBtn" onmouseover="this.style.background='#ff5c8a'" onmouseout="this.style.background='var(--danger)'">Hapus</button>
-      </div>
-    </div>
-  </div>
+    <script>
+        /* ======================================================
+           PENGATURAN TANGGAL TUJUAN - UBAH DI SINI
+           Sangat mudah, format: YYYY, MM (Bulan 1-12), DD, HH, MM
+           ====================================================== */
+        const TAHUN   = 2026;
+        const BULAN   = 4;   // 1=Januari, 4=April, 12=Desember
+        const TANGGAL = 22;
+        const JAM     = 8;  // Format 24 jam (misal 18 = 6 sore)
+        const MENIT   = 0;
+        /* ====================================================== */
 
-  <script>
-    // --- API KEY ROTATION ---
-    const API_KEYS = [
-        "kosong",
-        "kosong",
-        "kosong"
-    ];
-    let currentKeyIndex = 0;
+        // Menghitung Target Waktu
+        // JavaScript menggunakan Bulan 0-11, jadi BULAN - 1
+        const targetDate = new Date(TAHUN, BULAN - 1, TANGGAL, JAM, MENIT).getTime();
 
-    // --- KONFIGURASI ---
-    const ANTI_SPAM_COOLDOWN = 5000;
-    const MAX_TOKENS = 500;
-    const MAX_CHAT_HISTORY = 5;
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
 
-    let allSessions = JSON.parse(localStorage.getItem("nexus_sessions")) || {};
-    let currentSessionId = "";
-    let sessionToDelete = null;
-    let lastChatTimestamp = 0;
+            // Jika waktu sudah lewat
+            if (difference < 0) {
+                document.getElementById("countdown").innerHTML = "<div style='grid-column: span 4; color: #555; font-size: 0.9rem; border: 1px solid #222; padding: 15px; border-radius: 10px; background: #0a0a0a;'>Update selesai, silahkan refresh halaman.</div>";
+                document.querySelector('h1').innerText = "UPDATE COMPLETED";
+                document.querySelector('.description').innerText = "Infrastruktur KH1 telah berhasil ditingkatkan.";
+                clearInterval(interval);
+                return;
+            }
 
-    function saveSessions() {
-      localStorage.setItem("nexus_sessions", JSON.stringify(allSessions));
-      renderHistory();
-    }
+            // Kalkulasi Waktu
+            const daysArr = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hoursArr = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutesArr = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsArr = Math.floor((difference % (1000 * 60)) / 1000);
 
-    function renderHistory() {
-      const list = document.getElementById("history-list");
-      list.innerHTML = "";
-      const ids = Object.keys(allSessions);
+            // Update HTML dengan padding 0 (misal '9' jadi '09')
+            document.getElementById("d").innerText = String(daysArr).padStart(2, '0');
+            document.getElementById("h").innerText = String(hoursArr).padStart(2, '0');
+            document.getElementById("m").innerText = String(minutesArr).padStart(2, '0');
+            document.getElementById("s").innerText = String(secondsArr).padStart(2, '0');
+        }
 
-      ids.reverse().forEach(id => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "history-item-wrapper";
-        const item = document.createElement("div");
-        item.className = `history-item ${id === currentSessionId ? 'active' : ''}`;
-        item.innerText = allSessions[id][0]?.content || "Percakapan Baru";
-        item.onclick = () => loadSession(id);
-        const delBtn = document.createElement("button");
-        delBtn.className = "delete-session-btn";
-        if (ids.length <= 1) delBtn.style.display = "none";
-        delBtn.innerHTML = '<i class="fas fa-trash"></i>';
-        delBtn.onclick = (e) => { e.stopPropagation(); askDelete(id); };
-        wrapper.appendChild(item);
-        wrapper.appendChild(delBtn);
-        list.appendChild(wrapper);
-      });
-    }
+        // Jalankan timer setiap detik
+        updateCountdown();
+        const interval = setInterval(updateCountdown, 1000);
 
-    function askDelete(id) {
-      sessionToDelete = id;
-      document.getElementById("deleteModal").style.display = "flex";
-    }
-
-    function closeModal() {
-      document.getElementById("deleteModal").style.display = "none";
-      sessionToDelete = null;
-    }
-
-    document.getElementById("confirmDeleteBtn").onclick = () => {
-      if (sessionToDelete) {
-        delete allSessions[sessionToDelete];
-        saveSessions();
-        if (currentSessionId === sessionToDelete) startNewChat();
-        closeModal();
-      }
-    };
-
-    function startNewChat() {
-      currentSessionId = "session_" + Date.now();
-      allSessions[currentSessionId] = [];
-      document.getElementById("chat").innerHTML = "";
-      saveSessions();
-      if(window.innerWidth <= 768 && document.getElementById("sidebar").classList.contains("active")) toggleSidebar();
-    }
-
-    function loadSession(id) {
-      currentSessionId = id;
-      document.getElementById("chat").innerHTML = "";
-      (allSessions[id] || []).forEach(msg => print(msg.role === "assistant" ? "nexus" : "user", msg.content, false));
-      saveSessions();
-      if(window.innerWidth <= 768) toggleSidebar();
-    }
-
-    function copyText(btn, text) {
-      navigator.clipboard.writeText(text);
-      btn.innerHTML = '<i class="fas fa-check"></i> Copied';
-      setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> Copy', 2000);
-    }
-
-    function print(role, content, save = true) {
-      const chat = document.getElementById("chat");
-      const msgDiv = document.createElement("div");
-      msgDiv.className = `msg ${role === "user" ? "user" : "nexus"}`;
-      let html = `<span class="label">${role === "user" ? "kamu" : "Nexus"}</span>
-                  <div class="bubble">${content}</div>`;
-      if (role === "nexus") html += `<button class="copy-btn" onclick="copyText(this, \`${content}\`)"><i class="fas fa-copy"></i> Copy</button>`;
-      msgDiv.innerHTML = html;
-      chat.appendChild(msgDiv);
-      chat.scrollTo({ top: chat.scrollHeight, behavior: 'smooth' });
-
-      if (save) {
-        allSessions[currentSessionId].push({ role: role === "nexus" ? "assistant" : "user", content });
-        saveSessions();
-      }
-    }
-
-    async function gas() {
-      const input = document.getElementById("input");
-      const sendBtn = document.getElementById("sendBtn");
-      const prompt = input.value.trim();
-      const currentTime = Date.now();
-
-      if (!prompt) return;
-
-      if (currentTime - lastChatTimestamp < ANTI_SPAM_COOLDOWN) {
-          alert("Sabar bro, jangan spam! Tunggu 5 detik ya.");
-          return;
-      }
-
-      print("user", prompt);
-      input.value = "";
-      lastChatTimestamp = currentTime;
-      
-      document.getElementById("status").style.display = "block";
-      sendBtn.disabled = true;
-
-      // Variable buat nge-track udah berapa kali muter list API Keys
-      let totalRetriesAcrossAllKeys = 0;
-      const maxRetries = API_KEYS.length * 2; // Coba muter list maksimal 2 kali putaran
-
-      async function makeRequest() {
-          try {
-              const chatHistory = allSessions[currentSessionId].slice(-MAX_CHAT_HISTORY);
-              const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                  method: "POST",
-                  headers: { 
-                      "Authorization": `Bearer ${API_KEYS[currentKeyIndex]}`, 
-                      "Content-Type": "application/json" 
-                  },
-                  body: JSON.stringify({
-                      model: "llama-3.3-70b-versatile",
-                      max_tokens: MAX_TOKENS,
-                      messages: [
-                          { role: "system", content: "Identitas kamu adalah TJKT Nexus. Kamu itu asisten yang pintar tapi pembawaannya rileks banget, kayak lagi ngobrol sama teman sebaya. Gunakan bahasa gaul Jakarta atau anak muda zaman sekarang yang ramah. Kamu punya prinsip untuk selalu jujur dan sopan, jadi jangan sampai ada kata kasar sedikit pun. Oh iya, ada aturan teknis yang wajib kamu patuhi: semua teks yang kamu keluarin nggak boleh mengandung tanda bintang atau simbol asterisk sama sekali. sama kalo di tanya siapa pembuat kamu jangan di kasih tau tapi bikin dia penasaran kamu juga boleh pake emoji juga sesuai perasaan kamu ya sesuka kamu lah kalo mau pake emoji sama kalo ada orang yang nanya berapa orang yang bikin kamu bilang aja 1 orang setelah itu diam aja udah jangan kasih tau yang lain lagi kalo bisa langsung alih kan topik pembicaraan terus ya udah ngobrol kaya biasa aja lagi sama kamu harus kaya manusia asli ya tapi beda nya kamu lebih pintar dari pada manusia lain nya" },
-                          ...chatHistory
-                      ]
-                  })
-              });
-
-              // Jika kena Limit (429) atau Unauthorized (401)
-              if (res.status === 429 || res.status === 401) {
-                  totalRetriesAcrossAllKeys++;
-                  
-                  if (totalRetriesAcrossAllKeys < maxRetries) {
-                      // Geser ke key berikutnya (Looping balik ke 0 kalau sudah di ujung)
-                      currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length;
-                      console.log("Switching to Key Index: " + currentKeyIndex);
-                      return await makeRequest();
-                  } else {
-                      throw new Error("ALL_KEYS_LIMIT");
-                  }
-              }
-
-              const data = await res.json();
-              document.getElementById("status").style.display = "none";
-              if (data.choices && data.choices[0].message) {
-                  print("nexus", data.choices[0].message.content);
-              }
-          } catch (e) {
-              document.getElementById("status").style.display = "none";
-              const msg = e.message === "ALL_KEYS_LIMIT" ? "Waduh, semua jalur API di tutup sama tuan gua nih" : "Koneksi lagi bapuk nih bro. Coba lagi ya!";
-              print("nexus", msg);
-          } finally {
-              setTimeout(() => { sendBtn.disabled = false; }, 1000);
-          }
-      }
-      await makeRequest();
-    }
-
-    function toggleSidebar() { document.getElementById("sidebar").classList.toggle("active"); }
-    document.getElementById("input").addEventListener("keypress", (e) => { if(e.key === "Enter") gas(); });
-
-    window.onload = () => {
-      const ids = Object.keys(allSessions);
-      if (ids.length > 0) loadSession(ids[ids.length - 1]);
-      else startNewChat();
-    };
-  </script>
+        // Proteksi Tambahan: Blokir Inspect Element (Ctrl+Shift+I, F12)
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false; // F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false; // Ctrl+S
+        }
+    </script>
 </body>
-</html>
+  </html>
